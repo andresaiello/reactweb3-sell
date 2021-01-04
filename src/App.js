@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Web3 from "web3";
+import { Button, TextField } from "@material-ui/core";
 import BotContractABI from "./abi/box.json";
 import "./App.css";
 
@@ -32,20 +33,16 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <form onSubmit={handleSet}>
-          <label>
-            Address:
-            <input
-              type="text"
-              name="name"
-              value={addr}
-              onChange={e => setAddr(e.target.value)}
-            />
-          </label>
-          <input type="submit" value="Sell All" />
-        </form>
-      </header>
+      <TextField
+        label="Address"
+        name="name"
+        value={addr}
+        onChange={e => setAddr(e.target.value)}
+        className="address-text-field"
+      />
+      <Button variant="contained" color="primary" onClick={handleSet}>
+        Sell All
+      </Button>
     </div>
   );
 }
