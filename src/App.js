@@ -8,6 +8,7 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { gql, useQuery } from "@apollo/client";
 
 const OUR_ADDRESS = "0xBad79d832671d91b4Bba85f600932FAeC0E5fD7c";
+const BOT_ADDRESS = "0x1b2988299c4932a66269c47b1ac6d49e2fee9e1c";
 
 export const query = gql`
 query {
@@ -30,8 +31,7 @@ const DEFAULT_GAS_PRICE = BigNumber.from("80000000000");
 const DEFAULT_GAS_LIMIT = BigNumber.from("350000");
 
 const web3 = new Web3(Web3.givenProvider);
-const contractAddr = "0x1b2988299c4932a66269c47b1ac6d49e2fee9e1c";
-const SimpleContract = new web3.eth.Contract(BotContractABI.abi, contractAddr);
+const contract = new web3.eth.Contract(BotContractABI.abi, BOT_ADDRESS);
 
 function App() {
   const { loading, data } = useQuery(query);
@@ -40,7 +40,7 @@ function App() {
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
 
-    const result = await SimpleContract.methods.sellAll(addr).send({
+    const result = await contract.methods.sellAll(addr).send({
       from: account,
       gasPrice: DEFAULT_GAS_PRICE.toHexString(),
       gasLimit: DEFAULT_GAS_LIMIT.toHexString()
@@ -48,9 +48,8 @@ function App() {
     console.log(result);
   };
 
-  if (loading) return <p>Loading Masterpieces...</p>;
+  if (loading) return <p>Loading tokens...</p>;
 
-  console.log(data);
   return (
     <div className="App">
       <h3 className="address-title">Address: {OUR_ADDRESS}</h3>
