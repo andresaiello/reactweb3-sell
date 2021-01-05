@@ -7,8 +7,8 @@ import "./App.css";
 import { BigNumber } from "@ethersproject/bignumber";
 import { gql, useQuery } from "@apollo/client";
 
-const OUR_ADDRESS = "0xBad79d832671d91b4Bba85f600932FAeC0E5fD7c";
-const BOT_ADDRESS = "0x1b2988299c4932a66269c47b1ac6d49e2fee9e1c";
+const OUR_ADDRESS = "0xa8A0a2461E2Ba869A91281E75A01CD9Cd9171605";
+const BOT_ADDRESS = "0xa8A0a2461E2Ba869A91281E75A01CD9Cd9171605";
 
 export const query = gql`
 query {
